@@ -2,6 +2,7 @@ import { getOrders } from '@/api/get-orders'
 import { Pagination } from '@/components/pagination'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
@@ -22,6 +23,12 @@ export function Orders() {
     queryKey: ['orders', pageIndex],
     queryFn: () => getOrders({ pageIndex }),
   })
+
+  useEffect(() => {
+    if (!searchParams.get('page')) {
+      handlePaginate(1)
+    }
+  }, [])
 
   function handlePaginate(pageIndex: number) {
     setSearchParams((state) => {
