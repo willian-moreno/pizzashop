@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 import { OrderTableFilters } from './order-table-filters'
 import { OrderTableRow } from './order-table-row'
+import { OrderTableRowSkeleton } from './order-table-row-skeleton'
 
 export function Orders() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -14,6 +15,8 @@ export function Orders() {
     .number()
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
+
+  const ordersSkeleton = Array.from({ length: 10 }, (_, index) => index)
 
   const { data: result } = useQuery({
     queryKey: ['orders', pageIndex],
@@ -51,10 +54,13 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {result &&
-                  result.orders.map((order) => {
-                    return <OrderTableRow key={order.orderId} order={order} />
-                  })}
+                {result
+                  ? result.orders.map((order) => {
+                      return <OrderTableRow key={order.orderId} order={order} />
+                    })
+                  : ordersSkeleton.map((index) => {
+                      return <OrderTableRowSkeleton key={index} />
+                    })}
               </TableBody>
             </Table>
           </div>
