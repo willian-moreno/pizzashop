@@ -12,7 +12,7 @@ export function Pagination({ pageIndex, perPage, totalCount, onPageChange }: Pag
   const pages = Math.ceil(totalCount / perPage) || 1
 
   const isFirstPage = pageIndex === 0
-  const isLastPage = pageIndex === pages - 1
+  const isLastPage = pageIndex + 1 === pages
 
   function handleFirstPage() {
     onPageChange(0)
