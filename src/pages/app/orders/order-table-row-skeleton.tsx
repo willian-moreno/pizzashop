@@ -17,7 +17,10 @@ export function OrderTableRowSkeleton() {
       </TableCell>
 
       <TableCell>
-        <Skeleton className="h-4 w-16" />
+        <span className="flex items-center gap-2">
+          <Skeleton className="h-2 w-2 rounded-full" />
+          <Skeleton className="h-4 w-16" />
+        </span>
       </TableCell>
 
       <TableCell className="font-medium">
