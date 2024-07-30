@@ -77,12 +77,6 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
     },
   })
 
-  const isApproveButtonDisabled = isApprovingOrder
-  const isCancelButtonDisabled =
-    !['pending', 'processing'].includes(order.status) || isCancelingOrder
-  const isDispatchButtonDisabled = isDispatchingOrder
-  const isDeliverButtonDisabled = isDeliveringOrder
-
   function updateOrderCache(orderId: string, updateCallback: (order: Order) => Order) {
     const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
       queryKey: ['orders'],
@@ -182,7 +176,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
           <Button
             variant="outline"
             size="xs"
-            disabled={isApproveButtonDisabled}
+            disabled={isApprovingOrder}
             onClick={handleApproveOrder}
           >
             <ArrowRight className="mr-2 h-3 w-3" />
@@ -194,7 +188,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
           <Button
             variant="outline"
             size="xs"
-            disabled={isDispatchButtonDisabled}
+            disabled={isDispatchingOrder}
             onClick={handleDispatchOrder}
           >
             <ArrowRight className="mr-2 h-3 w-3" />
@@ -206,7 +200,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
           <Button
             variant="outline"
             size="xs"
-            disabled={isDeliverButtonDisabled}
+            disabled={isDeliveringOrder}
             onClick={handleDeliverOrder}
           >
             <ArrowRight className="mr-2 h-3 w-3" />
@@ -216,15 +210,12 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
       </TableCell>
 
       <TableCell>
-        <Button
-          variant="ghost"
-          size="xs"
-          disabled={isCancelButtonDisabled}
-          onClick={handleCancelOrder}
-        >
-          <X className="mr-2 h-3 w-3" />
-          Cancelar
-        </Button>
+        {['pending', 'processing'].includes(order.status) && (
+          <Button variant="ghost" size="xs" disabled={isCancelingOrder} onClick={handleCancelOrder}>
+            <X className="mr-2 h-3 w-3" />
+            Cancelar
+          </Button>
+        )}
       </TableCell>
     </TableRow>
   )
