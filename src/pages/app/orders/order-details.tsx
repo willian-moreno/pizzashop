@@ -10,10 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { dateDistanceToNow } from '@/utils/date-distance-to-now'
 import { priceFormatter } from '@/utils/price-formatter'
 import { useQuery } from '@tanstack/react-query'
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import { OrderDetailsTableRow } from './order-details-table-row'
 import { OrderDetailsTableSkeleton } from './order-details-table-skeleton'
 
@@ -66,10 +65,7 @@ export function OrderDetails({ orderId, isDetailOpen }: OrderDetailsProps) {
                 <TableRow>
                   <TableCell className="text-muted-foreground">Realizado há</TableCell>
                   <TableCell className="flex justify-end">
-                    {formatDistanceToNow(order.createdAt, {
-                      locale: ptBR,
-                      addSuffix: true,
-                    })}
+                    {dateDistanceToNow(order.createdAt)}
                   </TableCell>
                 </TableRow>
               </TableBody>
