@@ -12,6 +12,10 @@ import { OrderTableRowSkeleton } from './order-table-row-skeleton'
 
 export function Orders() {
   const [searchParams, setSearchParams] = useSearchParams()
+
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
+  const status = searchParams.get('status')
   const pageIndex = z.coerce
     .number()
     .transform((page) => page - 1)
@@ -20,8 +24,8 @@ export function Orders() {
   const ordersSkeleton = Array.from({ length: 10 }, (_, index) => index)
 
   const { data: result } = useQuery({
-    queryKey: ['orders', pageIndex],
-    queryFn: () => getOrders({ pageIndex }),
+    queryKey: ['orders', orderId, customerName, status, pageIndex],
+    queryFn: () => getOrders({ orderId, customerName, status, pageIndex }),
   })
 
   useEffect(() => {
@@ -61,13 +65,14 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {result
-                  ? result.orders.map((order) => {
-                      return <OrderTableRow key={order.orderId} order={order} />
-                    })
-                  : ordersSkeleton.map((index) => {
-                      return <OrderTableRowSkeleton key={index} />
-                    })}
+                {result &&
+                  result.orders.map((order) => {
+                    return <OrderTableRow key={order.orderId} order={order} />
+                  })}
+                {!result &&
+                  ordersSkeleton.map((index) => {
+                    return <OrderTableRowSkeleton key={index} />
+                  })}
               </TableBody>
             </Table>
           </div>
