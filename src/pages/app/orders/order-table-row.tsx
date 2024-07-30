@@ -51,7 +51,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
     }
   }
 
-  function updateOrderCache(orderId: string, updateActionFn: (order: Order) => Order) {
+  function updateOrderCache(orderId: string, updateCallback: (order: Order) => Order) {
     const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
       queryKey: ['orders'],
     })
@@ -70,9 +70,9 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
             return order
           }
 
-          const newOrderCache = updateActionFn(order)
+          const newOrder = updateCallback(order)
 
-          return newOrderCache
+          return newOrder
         }),
       })
     }
