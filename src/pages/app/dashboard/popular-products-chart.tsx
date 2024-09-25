@@ -1,7 +1,7 @@
 import { getPopularProducts } from '@/api/get-popular-products'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useQuery } from '@tanstack/react-query'
-import { BarChart } from 'lucide-react'
+import { BarChart, Loader2 } from 'lucide-react'
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import colors from 'tailwindcss/colors'
 
@@ -38,7 +38,7 @@ export function PopularProductsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        {popularProducts && (
+        {popularProducts ? (
           <ResponsiveContainer width="100%" height={240}>
             <PieChart style={{ fontSize: 12 }}>
               <Pie
@@ -51,7 +51,15 @@ export function PopularProductsChart() {
                 innerRadius={64}
                 strokeWidth={8}
                 labelLine={false}
-                label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }: CustomizedLabel) => {
+                label={({
+                  cx,
+                  cy,
+                  midAngle,
+                  innerRadius,
+                  outerRadius,
+                  value,
+                  index,
+                }: CustomizedLabel) => {
                   const RADIAN = Math.PI / 180
                   const radius = 12 + innerRadius + (outerRadius - innerRadius)
                   const x = cx + radius * Math.cos(-midAngle * RADIAN)
@@ -83,6 +91,10 @@ export function PopularProductsChart() {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
+        ) : (
+          <div className="flex h-[240px] w-full items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          </div>
         )}
       </CardContent>
     </Card>
