@@ -22,21 +22,21 @@ interface OrderDetailsProps {
 }
 
 export function OrderDetails({ orderId, isDetailOpen }: OrderDetailsProps) {
-  const { data: order } = useQuery({
+  const { data: order, isLoading: isOrderDetailsLoading } = useQuery({
     queryKey: ['order', orderId],
     queryFn: () => getOrderDetails({ orderId }),
     enabled: isDetailOpen,
   })
 
   return (
-    <DialogContent className="max-h-screen overflow-auto md:max-h-[90vh]">
+    <DialogContent className="max-h-screen overflow-y-auto md:max-h-[90vh]">
       <DialogHeader>
         <DialogTitle>Pedido: {orderId}</DialogTitle>
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
 
       <div className="space-y-6">
-        {order ? (
+        {order && (
           <>
             <Table>
               <TableBody>
@@ -95,9 +95,9 @@ export function OrderDetails({ orderId, isDetailOpen }: OrderDetailsProps) {
               </TableFooter>
             </Table>
           </>
-        ) : (
-          <OrderDetailsTableSkeleton />
         )}
+
+        {isOrderDetailsLoading && <OrderDetailsTableSkeleton />}
       </div>
     </DialogContent>
   )
