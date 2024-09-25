@@ -1,42 +1,47 @@
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TableCell, TableRow } from '@/components/ui/table'
+import { Search } from 'lucide-react'
 
 export function OrderTableRowSkeleton() {
   return (
     <TableRow>
       <TableCell>
-        <Skeleton className="h-8 w-8" />
+        <Button variant="outline" size="xs" disabled>
+          <Search className="h-3 w-3" />
+          <span className="sr-only">Detalhes do pedido</span>
+        </Button>
       </TableCell>
 
-      <TableCell className="font-mono text-xs font-medium">
-        <Skeleton className="h-4 w-40" />
+      <TableCell>
+        <Skeleton className="h-4 w-[172px]" />
       </TableCell>
 
-      <TableCell className="text-muted-foreground">
-        <Skeleton className="h-4 w-16" />
+      <TableCell>
+        <Skeleton className="h-4 w-[148px]" />
       </TableCell>
 
       <TableCell>
         <span className="flex items-center gap-2">
           <Skeleton className="h-2 w-2 rounded-full" />
-          <Skeleton className="h-4 w-16" />
+          <Skeleton className="h-4 w-[110px]" />
         </span>
       </TableCell>
 
-      <TableCell className="font-medium">
-        <Skeleton className="h-4 w-96" />
-      </TableCell>
-
-      <TableCell className="font-medium">
-        <Skeleton className="h-4 w-36" />
+      <TableCell>
+        <Skeleton className="h-4 w-[200px]" />
       </TableCell>
 
       <TableCell>
-        <Skeleton className="h-7 w-24" />
+        <Skeleton className="h-4 w-[64px]" />
       </TableCell>
 
       <TableCell>
-        <Skeleton className="h-7 w-24" />
+        <Skeleton className="h-7 w-[92px]" />
+      </TableCell>
+
+      <TableCell>
+        <Skeleton className="h-7 w-[92px]" />
       </TableCell>
     </TableRow>
   )

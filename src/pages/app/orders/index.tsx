@@ -23,7 +23,7 @@ export function Orders() {
 
   const ordersSkeleton = Array.from({ length: 10 }, (_, index) => index)
 
-  const { data: result } = useQuery({
+  const { data: result, isLoading: isLoadingOrders } = useQuery({
     queryKey: ['orders', orderId, customerName, status, pageIndex],
     queryFn: () => getOrders({ orderId, customerName, status, pageIndex }),
   })
@@ -69,7 +69,8 @@ export function Orders() {
                   result.orders.map((order) => {
                     return <OrderTableRow key={order.orderId} order={order} />
                   })}
-                {!result &&
+
+                {isLoadingOrders &&
                   ordersSkeleton.map((index) => {
                     return <OrderTableRowSkeleton key={index} />
                   })}
