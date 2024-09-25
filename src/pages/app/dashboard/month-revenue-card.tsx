@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
+import { MetricCardSkeleton } from './metric-card-skeleton'
 
 export function MonthRevenueCard() {
   const { data: monthRevenue } = useQuery({
@@ -39,10 +40,7 @@ export function MonthRevenueCard() {
             </p>
           </>
         ) : (
-          <>
-            <Skeleton className="h-8 w-24" />
-            <Skeleton className="h-4 w-56" />
-          </>
+          <MetricCardSkeleton />
         )}
       </CardContent>
     </Card>
