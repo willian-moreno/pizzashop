@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:test": "vite --port 5078 --mode test",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest"
@@ -51,6 +52,7 @@
     "happy-dom": "^15.7.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
+    "msw": "^2.7.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
@@ -60,5 +62,10 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vitest": "^2.1.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
