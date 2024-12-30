@@ -8,17 +8,25 @@ export function AppLayout() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const onAxiosError = (error: unknown) => {
+      if (!isAxiosError(error)) {
+        return
+      }
+
+      const status = error.response?.status
+      const code = error.response?.data.code
+
+      if (status === 401 && code === 'UNAUTHORIZED') {
+        navigate('/sign-in', { replace: true })
+      }
+    }
+
     const interceptorId = api.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (isAxiosError(error)) {
-          const status = error.response?.status
-          const code = error.response?.data.code
+        onAxiosError(error)
 
-          if (status === 401 && code === 'UNAUTHORIZED') {
-            navigate('/sign-in', { replace: true })
-          }
-        }
+        throw error
       },
     )
 
