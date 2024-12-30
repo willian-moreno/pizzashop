@@ -1,4 +1,4 @@
-import { api } from '@/lib/axios';
+import { api } from '@/lib/axios'
 
 export interface GetOrdersQuery {
   orderId?: string | null
@@ -10,7 +10,7 @@ export interface GetOrdersQuery {
 export type Order = {
   orderId: string
   createdAt: string
-  status: "pending" | "canceled" | "processing" | "delivering" | "delivered"
+  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
   customerName: string
   total: number
 }
@@ -33,7 +33,7 @@ export async function getOrders({ orderId, customerName, status, pageIndex }: Ge
       customerName,
       status,
       pageIndex: pageIndex ?? 0,
-    }
+    },
   })
 
   return response.data

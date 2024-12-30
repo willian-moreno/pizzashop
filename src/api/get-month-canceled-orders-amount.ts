@@ -1,4 +1,4 @@
-import { api } from '@/lib/axios';
+import { api } from '@/lib/axios'
 
 export interface GetMonthCanceledOrdersAmountResponse {
   amount: number
@@ -6,7 +6,9 @@ export interface GetMonthCanceledOrdersAmountResponse {
 }
 
 export async function getMonthCanceledOrdersAmount() {
-  const response = await api.get<GetMonthCanceledOrdersAmountResponse>('/metrics/month-canceled-orders-amount')
+  const response = await api.get<GetMonthCanceledOrdersAmountResponse>(
+    '/metrics/month-canceled-orders-amount',
+  )
 
   return response.data
 }
