@@ -1,5 +1,9 @@
 import { env } from '@/env'
 import { setupWorker } from 'msw/browser'
+import { approveOrderMock } from './approve-order-mock'
+import { cancelOrderMock } from './cancel-order-mock'
+import { deliverOrderMock } from './deliver-order-mock'
+import { dispatchOrderMock } from './dispatch-order-mock'
 import { getDailyRevenueInPeriodMock } from './get-daily-revenue-in-period-mock'
 import { getDayOrdersAmountMock } from './get-day-orders-amount-mock'
 import { getManagedRestaurantMock } from './get-managed-restaurant-mock'
@@ -15,6 +19,10 @@ import { signInMock } from './sign-in-mock'
 import { updateProfileMock } from './update-profile-mock'
 
 export const worker = setupWorker(
+  approveOrderMock,
+  cancelOrderMock,
+  deliverOrderMock,
+  dispatchOrderMock,
   getDailyRevenueInPeriodMock,
   getDayOrdersAmountMock,
   getManagedRestaurantMock,
