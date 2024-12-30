@@ -1,31 +1,30 @@
+import { subDays } from 'date-fns'
 import { http, HttpResponse } from 'msw'
 import { GetDailyRevenueInPeriodResponse } from '../get-daily-revenue-in-period'
 
-const oneDay = 1000 * 60 * 60 * 24
-
 const dailyRevenueInPeriod = [
   {
-    date: new Date().toLocaleDateString(),
+    date: subDays(new Date(), 5).toLocaleDateString(),
     receipt: 1568,
   },
   {
-    date: new Date(Date.now() + oneDay).toLocaleDateString(),
+    date: subDays(new Date(), 4).toLocaleDateString(),
     receipt: 2005,
   },
   {
-    date: new Date(Date.now() + oneDay * 2).toLocaleDateString(),
+    date: subDays(new Date(), 3).toLocaleDateString(),
     receipt: 1798,
   },
   {
-    date: new Date(Date.now() + oneDay * 3).toLocaleDateString(),
+    date: subDays(new Date(), 2).toLocaleDateString(),
     receipt: 1856,
   },
   {
-    date: new Date(Date.now() + oneDay * 4).toLocaleDateString(),
+    date: subDays(new Date(), 1).toLocaleDateString(),
     receipt: 2564,
   },
   {
-    date: new Date(Date.now() + oneDay * 5).toLocaleDateString(),
+    date: new Date().toLocaleDateString(),
     receipt: 1965,
   },
 ]
