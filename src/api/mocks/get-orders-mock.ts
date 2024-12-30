@@ -20,7 +20,8 @@ export const getOrdersMock = http.get<never, never, GetOrdersResponse>(
     const { searchParams } = new URL(request.url)
 
     const pageIndex = Number(searchParams.get('pageIndex') ?? 0)
-    const perPage = Number(searchParams.get('perPage') ?? 10)
+    const perPage = 10
+
     const customerName = searchParams.get('customerName')
     const orderId = searchParams.get('orderId')
     const status = searchParams.get('status')
