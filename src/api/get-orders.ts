@@ -7,10 +7,12 @@ export interface GetOrdersQuery {
   pageIndex?: number | null
 }
 
+export type OrderStatus = 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+
 export type Order = {
   orderId: string
   createdAt: string
-  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+  status: OrderStatus
   customerName: string
   total: number
 }
