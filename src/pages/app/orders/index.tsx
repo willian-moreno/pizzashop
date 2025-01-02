@@ -30,7 +30,7 @@ export function Orders() {
 
   useEffect(() => {
     if (!searchParams.get('page')) {
-      handlePaginate(1)
+      handlePaginate(0)
     }
   }, [])
 
