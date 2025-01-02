@@ -15,7 +15,7 @@ test('update profile successfully', async ({ page }) => {
 
   const toast = page.getByText('Perfil atualizado com sucesso.')
 
-  expect(toast).toBeVisible()
+  await expect(toast).toBeVisible()
 
   await page.getByRole('button', { name: 'Close' }).click()
 
@@ -37,7 +37,7 @@ test('update profile error', async ({ page }) => {
 
   const toast = page.getByText('Erro ao atualizar o perfil. Tente novamente.')
 
-  expect(toast).toBeVisible()
+  await expect(toast).toBeVisible()
 
   await page.getByRole('button', { name: 'Close' }).click()
 
